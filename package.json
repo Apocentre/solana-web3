@@ -1,10 +1,11 @@
 {
   "name": "@apocentre/solana-web3",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "main": "lib/index.js",
   "author": "Pavlos Polianidis <info@apocentre.com> (https://www.apocentre.com/)",
   "license": "MIT",
   "scripts": {},
+  "type": "module",
   "dependencies": {
     "@ppoliani/im-record": "^2.0.0",
     "@project-serum/anchor": "^0.22.1",

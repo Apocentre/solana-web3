@@ -1,6 +1,6 @@
 {
   "name": "@apocentre/solana-web3",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "main": "lib/index.js",
   "author": "Pavlos Polianidis <info@apocentre.com> (https://www.apocentre.com/)",
   "license": "MIT",
@@ -11,7 +11,9 @@
     "@solana/spl-token": "^0.2.0",
     "@metaplex-foundation/mpl-token-metadata": "^1.2.5",
     "number-to-bn": "^1.7.0",
-    "ttl-localstorage": "^2.0.0"
+    "ttl-localstorage": "^2.0.0",
+    "tiny-invariant": "^1.2.0",
+    "keccak256": "^1.0.6"
   },
   "repository": "git@github.com:Apocentre/solana-web3"
 }

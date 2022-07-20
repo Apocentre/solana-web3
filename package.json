@@ -1,6 +1,6 @@
 {
   "name": "@apocentre/solana-web3",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "main": "lib/index.js",
   "author": "Pavlos Polianidis <info@apocentre.com> (https://www.apocentre.com/)",
   "license": "MIT",

@@ -12,8 +12,7 @@
     "@coral-xyz/anchor": "0.29.0",
     "@solana/spl-token": "^0.3.10",
     "bip39": "^3.1.0",
-    "number-to-bn": "^1.7.0",
-    "ttl-localstorage": "^2.0.0"
+    "number-to-bn": "^1.7.0"
   },
   "repository": "git@github.com:Apocentre/solana-web3"
 }

@@ -1,7 +1,7 @@
 {
   "name": "@apocentre/solana-web3",
   "version": "0.9.6",
-  "main": "lib/index.js",
+  "main": "bundle.js",
   "files": [
     "bundle.js"
   ],

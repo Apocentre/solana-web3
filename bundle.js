@@ -349,7 +349,7 @@ const fetchPartialTokenAccountByOwner = async (self, owner) => {
   return tokenAccounts
 };
 
-const fetchMintTokensByOwner = async (
+const fetchTokenAccountByOwner = async (
   self,
   account,
   page=1,
@@ -362,7 +362,7 @@ const fetchMintTokensByOwner = async (
   const end = start + size;
   const slice = tokenAccounts.slice(start, end);
 
-  // Load the token ccounts for the current page
+  // Load the token accounts for the current page
   return (
     await Promise.all(
       slice.map(({pubkey}) => self.getTokenAccount(pubkey))
@@ -443,8 +443,8 @@ var token = /*#__PURE__*/Object.freeze({
   createMintAccount: createMintAccount,
   createNft: createNft,
   decodeTokenAccountData: decodeTokenAccountData,
-  fetchMintTokensByOwner: fetchMintTokensByOwner,
   fetchPartialTokenAccountByOwner: fetchPartialTokenAccountByOwner,
+  fetchTokenAccountByOwner: fetchTokenAccountByOwner,
   getAssociatedTokenAddress: getAssociatedTokenAddress,
   getMint: getMint,
   getTokenAccount: getTokenAccount,
@@ -481,7 +481,7 @@ const fetchRawMetadataAccount = async (self, tokenAccount) => {
 const fetchMetadataAccount = async (self, mint) => await Metadata.findByMint(self.connection, mint);
 
 const fetchNftsByOwner = async (self, account, page=1, size=10) => {
-  const tokenAccounts = await self.fetchMintTokensByOwner(account, page, size);
+  const tokenAccounts = await self.fetchTokenAccountByOwner(account, page, size);
   const accountsWithAmount = tokenAccounts.filter(({amount}) => amount > 0);
 
   return (
@@ -601,7 +601,12 @@ const Wallet = Record({
   signAllTransactions,
 });
 
-const init = async (self, connection, wallet, cache) => {
+const DEFAULT_CACHE = {
+  get() {/*  noop */},
+  set() {/*  noop */},
+};
+
+const init = async (self, connection, wallet, cache=DEFAULT_CACHE) => {
   self.connection = connection;
   self.wallet = wallet;
   // If no wallet is connected, set the provider as an object containing the connection

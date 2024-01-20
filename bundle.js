@@ -142,9 +142,9 @@ const getComputationBudgetIx = (_, units) => {
 
 const taExists = ta => ta.value.length > 0;
 
-const createATAIxIfNeeded = async (self, user, mint) => {
+const createATAIxIfNeeded = async (self, user, mint, allowOwnerOffCurve, tokenProgram) => {
   let ix;
-  const ata = await self.getAssociatedTokenAddress(mint, user, true);
+  const ata = await self.getAssociatedTokenAddress(mint, user, allowOwnerOffCurve, tokenProgram);
   const tokenAccount = await self.getTokenAccountByMintAndOwner(user, mint);
 
   if(!taExists(tokenAccount)) {
@@ -152,7 +152,8 @@ const createATAIxIfNeeded = async (self, user, mint) => {
       user,
       ata,
       user,
-      mint
+      mint,
+      tokenProgram,
     );
   }
 
@@ -196,11 +197,13 @@ const createATAIx = async (
   associatedToken,
   owner,
   mint,
+  programId,
 ) => await spl__namespace.createAssociatedTokenAccountInstruction(
   feePayer,
   associatedToken,
   owner,
   mint,
+  programId,
 );
 
 const mintTo = async (
@@ -210,7 +213,9 @@ const mintTo = async (
   dest,
   authority,
   amount,
-  multiSigners=[]
+  programId,
+  multiSigners,
+  confirmOptions,
 ) => await spl__namespace.mintTo(
   self.connection,
   feePayer,
@@ -219,6 +224,8 @@ const mintTo = async (
   authority,
   amount,
   multiSigners,
+  confirmOptions,
+  programId,
 );
 
 const transfer = async (
@@ -317,8 +324,8 @@ const closeTokenAccountIx = async (
 
 const getTokenAccount = async (self, tokenAccount) => await spl__namespace.getAccount(self.connection, tokenAccount);
 
-const getAssociatedTokenAddress = async (_, token, owner, allowOwnerOffCurve=true) => {
-  return await spl__namespace.getAssociatedTokenAddress(token, owner, allowOwnerOffCurve)
+const getAssociatedTokenAddress = async (_, token, owner, allowOwnerOffCurve=true, tokenProgram=spl__namespace.TOKEN_PROGRAM_ID) => {
+  return await spl__namespace.getAssociatedTokenAddress(token, owner, allowOwnerOffCurve, tokenProgram)
 };
 
 const getTokenProgramId = () => spl__namespace.TOKEN_PROGRAM_ID;

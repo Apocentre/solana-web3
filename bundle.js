@@ -301,6 +301,20 @@ const createNft = async (
   return token
 };
 
+const closeTokenAccountIx = async (
+  _,
+  tokenAccount,
+  destination,
+  closeAuthority,
+  programId = spl__namespace.TOKEN_PROGRAM_ID
+) => await spl__namespace.createCloseAccountInstruction(
+  tokenAccount,
+  destination,
+  closeAuthority,
+  null,
+  programId
+);
+
 const getTokenAccount = async (self, tokenAccount) => await spl__namespace.getAccount(self.connection, tokenAccount);
 
 const getAssociatedTokenAddress = async (_, token, owner, allowOwnerOffCurve=true) => {
@@ -439,6 +453,7 @@ const wrapSolIXs = async (self, wallet, lamports, nativeMint = spl__namespace.NA
 var token = /*#__PURE__*/Object.freeze({
   __proto__: null,
   approve: approve,
+  closeTokenAccountIx: closeTokenAccountIx,
   createATAIx: createATAIx,
   createMintAccount: createMintAccount,
   createNft: createNft,
@@ -643,17 +658,6 @@ const Web3 = Record({
   ...utils
 });
 
-Object.defineProperty(exports, "ASSOCIATED_TOKEN_PROGRAM_ID", {
-  enumerable: true,
-  get: function () { return spl.ASSOCIATED_TOKEN_PROGRAM_ID; }
-});
-Object.defineProperty(exports, "TOKEN_2022_PROGRAM_ID", {
-  enumerable: true,
-  get: function () { return spl.TOKEN_2022_PROGRAM_ID; }
-});
-Object.defineProperty(exports, "TOKEN_PROGRAM_ID", {
-  enumerable: true,
-  get: function () { return spl.TOKEN_PROGRAM_ID; }
-});
+exports.spl = spl__namespace;
 exports.Wallet = Wallet;
 exports.default = Web3;

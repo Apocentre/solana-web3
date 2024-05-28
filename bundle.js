@@ -140,6 +140,13 @@ const getComputationBudgetIx = (_, units) => {
   })
 };
 
+const setComputeUnitPrice = (_, microLamports) => {
+  return ComputeBudgetProgram.setComputeUnitPrice({
+    microLamports: microLamports,
+  });
+};
+
+
 const taExists = ta => ta.value.length > 0;
 
 const createATAIxIfNeeded = async (self, user, mint, allowOwnerOffCurve, tokenProgram) => {
@@ -169,6 +176,7 @@ var utils = /*#__PURE__*/Object.freeze({
   createATAIxIfNeeded: createATAIxIfNeeded,
   fromBase: fromBase,
   getComputationBudgetIx: getComputationBudgetIx,
+  setComputeUnitPrice: setComputeUnitPrice,
   taExists: taExists,
   toBase: toBase
 });

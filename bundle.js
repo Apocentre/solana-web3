@@ -30,9 +30,9 @@ var anchor__namespace = /*#__PURE__*/_interopNamespaceDefault(anchor);
 var spl__namespace = /*#__PURE__*/_interopNamespaceDefault(spl);
 var Bip39__namespace = /*#__PURE__*/_interopNamespaceDefault(Bip39);
 
-const init$2 = async (self, provider, programId, idl) => {
+const init$2 = async (self, provider, idl) => {
   self.provider = provider;
-  self.program = new anchor__namespace.Program(idl, programId, provider);
+  self.program = new anchor__namespace.Program(idl, provider);
   self.programId = self.program.programId;
   self.instruction = self.program.instruction;
   self.rpc = self.program.rpc;
